@@ -140,6 +140,3 @@ Instead, they:
 Wait for specific elements or texts to appear using `cy.contains(..., { timeout: ... })`.
 Wait for "validating/processing" text to disappear before checking for final status.
 This makes the tests more stable and better aligned with real application behaviour.
-
-  - Permission/role-based access to the Control Panel or AI validation feature.
-- Extract page objects for login/control-panel/pages for even more structured test code.
