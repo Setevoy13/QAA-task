@@ -99,26 +99,6 @@ Overall, this satisfies the requirement of **3 UI tests and 2 API tests**, with 
   - Post multipart form-data with the photo file to the **AI validation endpoint**.
   - Assert on the returned status/result field, again using accepted/rejected-style wording.
 
-## Assumptions
-
-- **Login API**:
-  - The UI authentication uses `POST /regions/oauth2/token` and returns an `access_token` per region.
--  - The API tests use this same OAuth2 endpoint.
-- **AI validation API**:
-  - Assumed endpoint: `POST ${apiBaseUrl}${aiValidationEndpoint}` where `aiValidationEndpoint` defaults to `/api/ai/validate-photo`.
-  - Assumed request: multipart form-data with a `file` field.
-  - Assumed response: JSON with `result` or `status` field including wording such as `accepted`, `rejected`, `hardhat`, `no hardhat`, `pass`, `fail`.
-  - If your API uses another shape or field names, update the relevant assertions.
-- **UI selectors & texts**:
-  - The tests intentionally rely mostly on **text-based selectors** (`cy.contains`) instead of brittle CSS/DOM selectors.
-  - They look for:
-    - A sign-in form containing text like `Sign in`.
-    - A `Control Panel` entry after login.
-    - Rows or links by project and site names.
-    - Buttons or labels containing `Upload photo`.
-    - Status messages containing `accepted`, `rejected`, `validating`, `processing`, `hardhat`, or `no hardhat`.
-  - If actual texts differ slightly, tweak the `cy.contains` matchers in `commands.ts` and `ai_validation_ui.cy.ts`.
-
 ## Environment / data cleanup limitations
 
 - The photo workflow placeholder for `Test Project 687` / `Test Site 2` (`locationId=7961`, `templateId=121043`) exposes a read API:
