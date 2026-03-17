@@ -69,15 +69,22 @@ npm run cypress:run
 
 ## Implemented tests
 
-There are **6 tests** in total:
+There are **11 tests** in total:
 
-- **3+ UI tests** (`cypress/e2e/ui/ai_validation_ui.cy.js`)
+- **5 UI tests** (`cypress/e2e/ui/ai_validation_ui.cy.js`)
   - Logs in and opens `Test Site 2` workflow.
   - Uploads a **hardhat** photo and expects the AI validation result to be accepted.
   - Uploads a **no-hardhat** photo and expects the AI validation result to be rejected.
-- **2 API tests** (`cypress/e2e/api/ai_validation_api.cy.js`)
+  - Uploads a **field-hardhat-off** photo and expects the AI validation result to be rejected.
+  - Uploads a **reghat-fsceout** photo and expects the AI validation result to be rejected.
+  - Uploads a **reghat** photo and expects the AI validation result to be rejected.
+- **6 API tests** (`cypress/e2e/api/ai_validation_api.cy.js`)
   - Authenticates via `POST /regions/oauth2/token` and asserts an `access_token` is returned.
   - Lists placeholders via `POST /control-panel/api/placeholders/photos` for the configured `locationId`/`templateId` using the bearer token.
+  - returns 401 Unauthorized for invalid bearer token
+  - returns 401 Unauthorized when Authorization header is missing
+  - returns 500 error for missing required locationId parameter
+  - returns 500 error for invalid locationId format
 
 Overall, this satisfies the requirement of **3 UI tests and 2 API tests**, with one extra UI test as a bonus (the basic navigation/login scenario).
 
@@ -133,17 +140,11 @@ Overall, this satisfies the requirement of **3 UI tests and 2 API tests**, with 
 
 ## Waiting strategy
 
-- The tests avoid fixed `cy.wait()` sleeps.
-- Instead, they:
-  - Wait for specific elements or texts to appear using `cy.contains(..., { timeout: ... })`.
-  - Wait for "validating/processing" text to disappear before checking for final status.
-
+The tests avoid fixed `cy.wait()` sleeps.
+Instead, they:
+Wait for specific elements or texts to appear using `cy.contains(..., { timeout: ... })`.
+Wait for "validating/processing" text to disappear before checking for final status.
 This makes the tests more stable and better aligned with real application behaviour.
 
-## Possible extensions / bonus ideas
-
-- Add tests to cover:
-  - Invalid file types or oversized images.
-  - Network/API failure cases and UI error handling.
   - Permission/role-based access to the Control Panel or AI validation feature.
 - Extract page objects for login/control-panel/pages for even more structured test code.
