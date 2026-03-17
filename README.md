@@ -36,11 +36,6 @@ Key `env` values:
 - **`apiBaseUrl`**: base URL for API calls (default: `https://closeout-r1.enetelsolutions.com`).
 - **`aiValidationEndpoint`**: path for the AI validation API endpoint (default: `/api/ai/validate-photo` — **assumption**, see below).
 
-You can override env values from the CLI, for example:
-
-```bash
-npx cypress run --env email=myuser@example.com,password=Secret123
-```
 
 ## Running the tests
 
