@@ -1,0 +1,13 @@
+{
+  "name": "closeout-qa-automation",
+  "version": "1.0.0",
+  "description": "QA automation assignment for Closeout UI and API tests using JavaScript and Cypress.",
+  "scripts": {
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run",
+    "test": "npm run cypress:run"
+  },
+  "devDependencies": {
+    "cypress": "^13.15.0"
+  }
+}
