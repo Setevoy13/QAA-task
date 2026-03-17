@@ -81,8 +81,6 @@ There are **11 tests** in total:
   - returns 500 error for missing required locationId parameter
   - returns 500 error for invalid locationId format
 
-Overall, this satisfies the requirement of **3 UI tests and 2 API tests**, with one extra UI test as a bonus (the basic navigation/login scenario).
-
 ## How the tests work
 
 - **Reusable commands** are implemented in `cypress/support/commands.js`:
